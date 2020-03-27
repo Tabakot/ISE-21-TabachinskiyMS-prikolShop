@@ -151,7 +151,7 @@ namespace PrikolShopFileImplement
                 {
                     xElement.Add(new XElement("Order",
                     new XAttribute("Id", order.Id),
-                    new XElement("ProductId", order.GiftBoxId),
+                    new XElement("GiftBoxId", order.GiftBoxId),
                     new XElement("Count", order.Count),
                     new XElement("Sum", order.Sum),
                     new XElement("Status", order.Status),
@@ -171,7 +171,7 @@ namespace PrikolShopFileImplement
                 {
                     xElement.Add(new XElement("GiftBox",
                     new XAttribute("Id", giftBox.Id),
-                    new XElement("ProductName", giftBox.GiftBoxName),
+                    new XElement("GiftBoxName", giftBox.GiftBoxName),
                     new XElement("Price", giftBox.Price)));
                 }
                 XDocument xDocument = new XDocument(xElement);
