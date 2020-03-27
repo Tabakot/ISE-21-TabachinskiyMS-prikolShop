@@ -136,6 +136,10 @@
       <Project>{bbdab068-9c36-4d37-9e97-6140b523d10f}</Project>
       <Name>PrikolShopBusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrikolShopFileImplement\PrikolShopFileImplement.csproj">
+      <Project>{526e89ae-834f-4712-ab25-7e90f411b862}</Project>
+      <Name>PrikolShopFileImplement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PrikolShopListImplement\PrikolShopListImplement.csproj">
       <Project>{cac955c2-0ca9-41bd-b2d3-8d9f0b9e97f7}</Project>
       <Name>PrikolShopListImplement</Name>
