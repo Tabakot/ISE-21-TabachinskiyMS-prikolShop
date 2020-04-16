@@ -14,7 +14,7 @@ Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
-    public virtual DbSet<Gift> Gifts { set; get; }
+        public virtual DbSet<Gift> Gifts { set; get; }
         public virtual DbSet<GiftBox> GiftBoxes { set; get; }
         public virtual DbSet<Box> Boxes { set; get; }
         public virtual DbSet<Order> Orders { set; get; }

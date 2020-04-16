@@ -82,6 +82,7 @@ namespace PrikolShopDatabaseImplement.Implements
                 }
             }
         }
+
         public void Delete(GiftBoxBindingModel model)
         {
             using (var context = new PrikolShopDatabase())
@@ -93,8 +94,7 @@ namespace PrikolShopDatabaseImplement.Implements
                         // удаяем записи по компонентам при удалении изделия
                         context.Boxes.RemoveRange(context.Boxes.Where(rec =>
                         rec.GiftBoxId == model.Id));
-                        GiftBox element = context.GiftBoxes.FirstOrDefault(rec => rec.Id
-                       == model.Id);
+                        GiftBox element = context.GiftBoxes.FirstOrDefault(rec => rec.Id == model.Id);
                         if (element != null)
                         {
                             context.GiftBoxes.Remove(element);
