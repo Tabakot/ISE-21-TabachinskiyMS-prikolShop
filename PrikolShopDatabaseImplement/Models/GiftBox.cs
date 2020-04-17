@@ -14,5 +14,6 @@ namespace PrikolShopDatabaseImplement.Models
         public decimal Price { get; set; }
         [ForeignKey("GiftBoxId")]
         public virtual List<Box> Boxes { get; set; }
+        public virtual List<Order> Orders { get; set; }
     }
 }

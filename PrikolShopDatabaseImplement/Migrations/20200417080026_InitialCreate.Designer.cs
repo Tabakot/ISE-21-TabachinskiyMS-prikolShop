@@ -10,7 +10,7 @@ using PrikolShopDatabaseImplement;
 namespace PrikolShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(PrikolShopDatabase))]
-    [Migration("20200327041626_InitialCreate")]
+    [Migration("20200417080026_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,16 +28,13 @@ namespace PrikolShopDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BoxId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
                     b.Property<int>("GiftBoxId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GiftId")
+                    b.Property<int>("GiftId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -111,6 +108,8 @@ namespace PrikolShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GiftBoxId");
+
                     b.ToTable("Orders");
                 });
 
@@ -124,7 +123,18 @@ namespace PrikolShopDatabaseImplement.Migrations
 
                     b.HasOne("PrikolShopDatabaseImplement.Models.Gift", "Gift")
                         .WithMany("Boxes")
-                        .HasForeignKey("GiftId");
+                        .HasForeignKey("GiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PrikolShopDatabaseImplement.Models.Order", b =>
+                {
+                    b.HasOne("PrikolShopDatabaseImplement.Models.GiftBox", "GiftBox")
+                        .WithMany()
+                        .HasForeignKey("GiftBoxId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
