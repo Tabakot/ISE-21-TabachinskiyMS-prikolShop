@@ -5,123 +5,85 @@ using PrikolShopBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace PrikolShopBusinessLogic.BusinessLogics
 {
     public class ReportLogic
     {
-        private readonly IGiftLogic giftLogic;
-
-        private readonly IGiftBoxLogic giftBoxLogic;
-
+        private readonly IGiftLogic GiftLogic;
+        private readonly IGiftBoxLogic GiftBoxLogic;
         private readonly IOrderLogic orderLogic;
-
-        public ReportLogic(IGiftBoxLogic giftBoxLogic, IGiftLogic giftLogic, IOrderLogic orderLLogic)
+        public ReportLogic(IGiftBoxLogic GiftBoxLogic, IGiftLogic GiftLogic,
+       IOrderLogic orderLogic)
         {
-            this.giftBoxLogic = giftBoxLogic;
-            this.giftLogic = giftLogic;
-            this.orderLogic = orderLLogic;
+            this.GiftBoxLogic = GiftBoxLogic;
+            this.GiftLogic = GiftLogic;
+            this.orderLogic = orderLogic;
         }
 
-        /// <summary> 
-        /// Получение списка компонент с указанием, в каких изделиях используются 
-        /// </summary>   
-        /// <returns></returns>
         public List<ReportBoxViewModel> GetBox()
         {
-            var gifts = giftLogic.Read(null);
-
-            var giftBoxes = giftBoxLogic.Read(null);
-
+            var GiftBoxes = GiftBoxLogic.Read(null);
             var list = new List<ReportBoxViewModel>();
-
-            foreach (var gift in gifts)
+            foreach (var giftBox in GiftBoxes)
             {
-                var record = new ReportBoxViewModel
-                { 
-                    GiftName = gift.GiftName,
-                    GiftBoxes = new List<Tuple<string, int>>(),
-                    TotalCount = 0 
-                };
-
-                foreach (var giftBox in giftBoxes)
+                foreach (var b in giftBox.Boxes)
                 {
-                    if (giftBox.Boxes.ContainsKey(gift.Id)) 
+                    var record = new ReportBoxViewModel
                     {
-                        record.GiftBoxes.Add(new Tuple<string, int>(giftBox.GiftBoxName,
-                            giftBox.Boxes[gift.Id].Item2));
-                        record.TotalCount += giftBox.Boxes[gift.Id].Item2;
-                    }
+                        GiftBoxName = giftBox.GiftBoxName,
+                        GiftName = b.Value.Item1,
+                        Count = b.Value.Item2
+                    };
+                    list.Add(record);
                 }
-
-                list.Add(record);
             }
-
             return list;
         }
 
-        /// <summary>        
-        /// Получение списка заказов за определенный период     
-        /// </summary>    
-        /// <param name="model"></param>     
-        /// <returns></returns>
-        public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model) 
+        public List<IGrouping<DateTime, OrderViewModel>> GetOrders(ReportBindingModel model)
         {
-            return orderLogic.Read(new OrderBindingModel 
+            var list = orderLogic
+            .Read(new OrderBindingModel
             {
                 DateFrom = model.DateFrom,
-                DateTo = model.DateTo 
-            }).Select(x => new ReportOrdersViewModel 
-            {
-                DateCreate = x.DateCreate,
-                GiftBoxName = x.GiftBoxName,
-                Count = x.Count,
-                Sum = x.Sum,
-                Status = x.Status
-            }).ToList();
-        }
+                DateTo = model.DateTo
+            })
+            .GroupBy(rec => rec.DateCreate.Date)
+            .OrderBy(recG => recG.Key)
+            .ToList();
 
-        /// <summary> 
-        /// Сохранение компонент в файл-Word 
-        /// </summary> 
-        /// <param name="model"></param> 
-        public void SaveComponentsToWordFile(ReportBindingModel model) 
+            return list;
+        }
+        
+        public void SaveGiftsToWordFile(ReportBindingModel model)
         {
-            SaveToWord.CreateDoc(new WordInfo 
+            SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
                 Title = "Список подарков",
-                Gifts = giftLogic.Read(null)
+                Gifts = GiftLogic.Read(null)
             });
         }
 
-        /// <summary>    
-        /// Сохранение компонент с указаеним продуктов в файл-Excel    
-        /// </summary>       
-        /// <param name="model"></param> 
-        public void SaveProductComponentToExcelFile(ReportBindingModel model) 
+        public void SaveOrdersToExcelFile(ReportBindingModel model)
         {
             SaveToExcel.CreateDoc(new ExcelInfo
-            { 
-                FileName = model.FileName,
-                Title = "Список подарков",
-                Boxes = GetBox()
-            });
-        }
-
-        /// <summary>      
-        /// Сохранение заказов в файл-Pdf      
-        /// </summary>     
-        /// <param name="model"></param>
-        public void SaveOrdersToPdfFile(ReportBindingModel model)
-        { 
-            SaveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
-                DateFrom = model.DateFrom.Value,
-                DateTo = model.DateTo.Value,
                 Orders = GetOrders(model)
+            });
+        }
+        
+        public void SaveGiftBoxesToPdfFile(ReportBindingModel model)
+        {
+            SaveToPdf.CreateDoc(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Список подарочных наборов по подаркам",
+                Boxes = GetBox(),
             });
         }
     }

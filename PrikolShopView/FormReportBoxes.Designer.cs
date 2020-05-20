@@ -28,71 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.Gift = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GiftBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ButtonSaveToExcel = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.buttonMake = new System.Windows.Forms.Button();
+            this.buttonToPdf = new System.Windows.Forms.Button();
+            this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
-            // dataGridView
+            // buttonMake
             // 
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Gift,
-            this.GiftBox,
-            this.TotalCount});
-            this.dataGridView.Location = new System.Drawing.Point(0, 45);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(439, 314);
-            this.dataGridView.TabIndex = 0;
+            this.buttonMake.Location = new System.Drawing.Point(13, 6);
+            this.buttonMake.Name = "buttonMake";
+            this.buttonMake.Size = new System.Drawing.Size(117, 20);
+            this.buttonMake.TabIndex = 4;
+            this.buttonMake.Text = "Сформировать";
+            this.buttonMake.UseVisualStyleBackColor = true;
+            this.buttonMake.Click += new System.EventHandler(this.ButtonMake_Click);
             // 
-            // Gift
+            // buttonToPdf
             // 
-            this.Gift.HeaderText = "Подарок";
-            this.Gift.Name = "Gift";
+            this.buttonToPdf.Location = new System.Drawing.Point(152, 6);
+            this.buttonToPdf.Name = "buttonToPdf";
+            this.buttonToPdf.Size = new System.Drawing.Size(144, 20);
+            this.buttonToPdf.TabIndex = 5;
+            this.buttonToPdf.Text = "в Pdf";
+            this.buttonToPdf.UseVisualStyleBackColor = true;
+            this.buttonToPdf.Click += new System.EventHandler(this.ButtonToPdf_Click);
             // 
-            // GiftBox
+            // reportViewer
             // 
-            this.GiftBox.HeaderText = "Подарочный набор";
-            this.GiftBox.Name = "GiftBox";
-            // 
-            // TotalCount
-            // 
-            this.TotalCount.HeaderText = "Количество";
-            this.TotalCount.Name = "TotalCount";
-            // 
-            // ButtonSaveToExcel
-            // 
-            this.ButtonSaveToExcel.Location = new System.Drawing.Point(13, 13);
-            this.ButtonSaveToExcel.Name = "ButtonSaveToExcel";
-            this.ButtonSaveToExcel.Size = new System.Drawing.Size(75, 23);
-            this.ButtonSaveToExcel.TabIndex = 1;
-            this.ButtonSaveToExcel.Text = "Сохранить в Excel";
-            this.ButtonSaveToExcel.UseVisualStyleBackColor = true;
-            this.ButtonSaveToExcel.Click += new System.EventHandler(this.ButtonSaveToExcel_Click);
+            this.reportViewer.LocalReport.ReportEmbeddedResource = "PrikolShopView.Report.rdlc";
+            this.reportViewer.Location = new System.Drawing.Point(13, 32);
+            this.reportViewer.Name = "reportViewer";
+            this.reportViewer.ServerReport.BearerToken = null;
+            this.reportViewer.Size = new System.Drawing.Size(656, 305);
+            this.reportViewer.TabIndex = 1;
             // 
             // FormReportBoxes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(439, 371);
-            this.Controls.Add(this.ButtonSaveToExcel);
-            this.Controls.Add(this.dataGridView);
+            this.ClientSize = new System.Drawing.Size(687, 347);
+            this.Controls.Add(this.reportViewer);
+            this.Controls.Add(this.buttonToPdf);
+            this.Controls.Add(this.buttonMake);
             this.Name = "FormReportBoxes";
-            this.Text = "FormReportBoxes";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.Text = "Отчет по подарочным наборам с подарками";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Gift;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GiftBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalCount;
-        private System.Windows.Forms.Button ButtonSaveToExcel;
+        private System.Windows.Forms.Button buttonMake;
+        private System.Windows.Forms.Button buttonToPdf;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
     }
 }

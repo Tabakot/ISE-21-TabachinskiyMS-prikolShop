@@ -6,10 +6,8 @@ namespace PrikolShopBusinessLogic.ViewModels
 {
     public class ReportBoxViewModel
     {
+        public string GiftBoxName { get; set; }
         public string GiftName { get; set; }
-
-        public int TotalCount { get; set; }
-
-        public List<Tuple<string, int>> GiftBoxes { get; set; }
+        public int Count { get; set; }
     }
 }
