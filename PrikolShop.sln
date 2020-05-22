@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrikolShopBusinessLogic", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrikolShopListImplement", "PrikolShopListImplement\PrikolShopListImplement.csproj", "{CAC955C2-0CA9-41BD-B2D3-8D9F0B9E97F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrikolShopFileImplement", "PrikolShopFileImplement\PrikolShopFileImplement.csproj", "{526E89AE-834F-4712-AB25-7E90F411B862}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrikolShopFileImplement", "PrikolShopFileImplement\PrikolShopFileImplement.csproj", "{526E89AE-834F-4712-AB25-7E90F411B862}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrikolShopDatabaseImplement", "PrikolShopDatabaseImplement\PrikolShopDatabaseImplement.csproj", "{7329B16B-B971-4F28-A581-DC4B27906837}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{526E89AE-834F-4712-AB25-7E90F411B862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{526E89AE-834F-4712-AB25-7E90F411B862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{526E89AE-834F-4712-AB25-7E90F411B862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7329B16B-B971-4F28-A581-DC4B27906837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7329B16B-B971-4F28-A581-DC4B27906837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7329B16B-B971-4F28-A581-DC4B27906837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7329B16B-B971-4F28-A581-DC4B27906837}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
