@@ -30,15 +30,16 @@ namespace PrikolShopBusinessLogic.BusinessLogics
                     } 
                 }));
 
-                foreach (var gift in info.Gifts)
+                foreach (var giftBox in info.GiftBoxes)
                 {
                     docBody.AppendChild(CreateParagraph(new WordParagraph
                     { 
-                        Texts = new List<string> { gift.GiftName },
+                        Texts = new List<string> { giftBox.GiftBoxName, ":" + giftBox.Price.ToString() },
                         TextProperties = new WordParagraphProperties
                         {
                             Size = "24",
-                            JustificationValues = JustificationValues.Both
+                            JustificationValues = JustificationValues.Both,
+                            Bold = true
                         }
                     })); 
                 }
@@ -79,7 +80,9 @@ namespace PrikolShopBusinessLogic.BusinessLogics
                     {
                         Val = paragraph.TextProperties.Size
                     });
-                    if (paragraph.TextProperties.Bold) { properties.AppendChild(new Bold());
+                    if (!run.StartsWith(":") && paragraph.TextProperties.Bold)
+                    {
+                        properties.AppendChild(new Bold());
                     }
 
                     docRun.AppendChild(properties);

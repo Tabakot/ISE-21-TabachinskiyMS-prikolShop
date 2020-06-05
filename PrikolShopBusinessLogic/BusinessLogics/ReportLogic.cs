@@ -62,8 +62,8 @@ namespace PrikolShopBusinessLogic.BusinessLogics
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список подарков",
-                Gifts = GiftLogic.Read(null)
+                Title = "Список подарочных наборов",
+                GiftBoxes = GiftBoxLogic.Read(null)
             });
         }
 

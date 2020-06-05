@@ -11,6 +11,6 @@ namespace PrikolShopBusinessLogic.HelperModels
 
         public string Title { get; set; }
 
-        public List<GiftViewModel> Gifts { get; set; }
+        public List<GiftBoxViewModel> GiftBoxes { get; set; }
     }
 }
