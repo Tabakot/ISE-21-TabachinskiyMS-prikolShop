@@ -4,4 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="BindingModels\ReportBindingModel .cs\**" />
+    <EmbeddedResource Remove="BindingModels\ReportBindingModel .cs\**" />
+    <None Remove="BindingModels\ReportBindingModel .cs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.10.1" />
+    <PackageReference Include="PDFsharp-MigraDoc" Version="1.50.5147" />
+  </ItemGroup>
+
 </Project>
